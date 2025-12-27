@@ -1,65 +1,66 @@
-import Image from "next/image";
+import { ShoppingCart, Star, Truck, Shield } from 'lucide-react';
+import ProductCard from '@/components/ProductCard';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <section className="text-center py-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl text-white mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Selamat Belanja!</h1>
+          <p className="text-xl mb-8">Produk berkualitas dengan harga terbaik</p>
+          <button className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition">
+            Belanja Sekarang
+          </button>
+        </section>
+
+        {/* Features */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          {[
+            { icon: Truck, text: "Gratis Ongkir", desc: "Min. Belanja 100k" },
+            { icon: Shield, text: "Garansi", desc: "30 Hari Pengembalian" },
+            { icon: Star, text: "Kualitas", desc: "Produk Original" },
+            { icon: ShoppingCart, text: "Mudah", desc: "Checkout Cepat" },
+          ].map((item, idx) => (
+            <div key={idx} className="bg-white p-4 rounded-xl shadow text-center">
+              <item.icon className="w-10 h-10 mx-auto mb-2 text-blue-500" />
+              <h3 className="font-bold">{item.text}</h3>
+              <p className="text-sm text-gray-600">{item.desc}</p>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        {/* Products */}
+        <section>
+          <h2 className="text-3xl font-bold mb-8 text-center">Produk Terpopuler</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ProductCard
+              name="Sepatu Sneakers Premium"
+              price={299000}
+              image="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600"
+              rating={4.8}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <ProductCard
+              name="Kamera Mirrorless"
+              price={4500000}
+              image="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600"
+              rating={4.9}
+            />
+            <ProductCard
+              name="Headphone Wireless"
+              price={799000}
+              image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600"
+              rating={4.7}
+            />
+          </div>
+        </section>
       </main>
+
+      <Footer />
     </div>
   );
 }
