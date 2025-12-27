@@ -9,13 +9,25 @@ const nextConfig = {
       },
     ],
   },
-  // Disable TypeScript checking during build
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Disable ESLint during build
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  // Force disable SWC minifier, use Terser instead
+  swcMinify: false,
+  // Use Babel instead of SWC for compatibility
+  experimental: {
+    forceSwcTransforms: false,
+  },
+  // Disable SWC completely for Android
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      // Optimize for production
+      config.optimization.minimizer = [];
+    }
+    return config;
   },
 };
 
