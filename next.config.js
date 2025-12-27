@@ -1,33 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',  // <-- Ini akan mengexport static HTML
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/**',
-      },
-    ],
+    unoptimized: true, // <-- Required for static export
   },
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  // Force disable SWC minifier, use Terser instead
-  swcMinify: false,
-  // Use Babel instead of SWC for compatibility
-  experimental: {
-    forceSwcTransforms: false,
-  },
-  // Disable SWC completely for Android
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      // Optimize for production
-      config.optimization.minimizer = [];
-    }
-    return config;
   },
 };
 
